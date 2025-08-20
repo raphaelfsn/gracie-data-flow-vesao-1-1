@@ -1,0 +1,205 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
+import { Users, Heart, Eye, ExternalLink, TrendingUp } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+
+export const InstagramTab = () => {
+  const kpis = [
+    {
+      title: "Novos Seguidores",
+      value: "156",
+      change: "+24.8%",
+      icon: Users,
+      description: "Este mês"
+    },
+    {
+      title: "Engajamento Total",
+      value: "2.340",
+      change: "+18.2%",
+      icon: Heart,
+      description: "Curtidas + comentários"
+    },
+    {
+      title: "Alcance das Publicações",
+      value: "18.450",
+      change: "+22.5%",
+      icon: Eye,
+      description: "Contas alcançadas"
+    },
+    {
+      title: "Cliques no Link da Bio",
+      value: "89",
+      change: "+15.6%",
+      icon: ExternalLink,
+      description: "Cliques no link"
+    }
+  ];
+
+  const engagementEvolution = [
+    { data: '01/05', engajamento: 180 },
+    { data: '02/05', engajamento: 220 },
+    { data: '03/05', engajamento: 195 },
+    { data: '04/05', engajamento: 275 },
+    { data: '05/05', engajamento: 240 },
+    { data: '06/05', engajamento: 320 },
+    { data: '07/05', engajamento: 290 },
+  ];
+
+  const postsPerformance = [
+    {
+      post: "Aula de Guard Pass",
+      engajamento: 425,
+      alcance: 2850,
+      comentarios: 38,
+      curtidas: 387,
+      salvamentos: 45
+    },
+    {
+      post: "Competição Regional",
+      engajamento: 380,
+      alcance: 2650,
+      comentarios: 42,
+      curtidas: 338,
+      salvamentos: 28
+    },
+    {
+      post: "Treino Feminino",
+      engajamento: 510,
+      alcance: 3200,
+      comentarios: 55,
+      curtidas: 455,
+      salvamentos: 62
+    },
+    {
+      post: "Professor Visitante",
+      engajamento: 295,
+      alcance: 2100,
+      comentarios: 25,
+      curtidas: 270,
+      salvamentos: 18
+    },
+    {
+      post: "Graduação Faixas",
+      engajamento: 680,
+      alcance: 4200,
+      comentarios: 78,
+      curtidas: 602,
+      salvamentos: 85
+    }
+  ];
+
+  const followersOrigin = [
+    { name: 'Explorar', value: 45, color: 'hsl(var(--primary))' },
+    { name: 'Hashtags', value: 30, color: 'hsl(var(--secondary))' },
+    { name: 'Perfil', value: 15, color: 'hsl(var(--accent))' },
+    { name: 'Outros', value: 10, color: 'hsl(var(--muted))' },
+  ];
+
+  return (
+    <div className="space-y-6">
+      {/* KPIs Grid */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {kpis.map((kpi, index) => (
+          <Card key={index}>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">{kpi.title}</CardTitle>
+              <kpi.icon className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{kpi.value}</div>
+              <div className="flex items-center space-x-2 text-xs text-muted-foreground">
+                <span className="text-green-600 font-medium">{kpi.change}</span>
+                <span>{kpi.description}</span>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Charts Grid */}
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* Engagement Evolution */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Evolução do Engajamento</CardTitle>
+            <CardDescription>Variação diária das interações</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={engagementEvolution}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="data" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="engajamento" stroke="hsl(var(--primary))" strokeWidth={2} />
+              </LineChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        {/* Followers Origin */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Origem dos Seguidores</CardTitle>
+            <CardDescription>De onde vieram os novos seguidores</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={followersOrigin}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {followersOrigin.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Posts Performance Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Desempenho dos Posts</CardTitle>
+          <CardDescription>Análise detalhada das publicações recentes</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Post</TableHead>
+                <TableHead>Engajamento</TableHead>
+                <TableHead>Alcance</TableHead>
+                <TableHead>Comentários</TableHead>
+                <TableHead>Curtidas</TableHead>
+                <TableHead>Salvamentos</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {postsPerformance.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell className="font-medium">{item.post}</TableCell>
+                  <TableCell>{item.engajamento}</TableCell>
+                  <TableCell>{item.alcance.toLocaleString()}</TableCell>
+                  <TableCell>{item.comentarios}</TableCell>
+                  <TableCell>{item.curtidas}</TableCell>
+                  <TableCell>{item.salvamentos}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
