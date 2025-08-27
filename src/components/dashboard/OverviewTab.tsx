@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
 import { Users, DollarSign, UserPlus, UserMinus, Target } from 'lucide-react';
+import { SalesFunnel } from './SalesFunnel';
 
 export const OverviewTab = () => {
   const kpis = [
@@ -49,20 +50,15 @@ export const OverviewTab = () => {
     { mes: 'Mai', novos: 28, cancelamentos: 8 },
   ];
 
-  const roiData = [
-    { plataforma: 'Meta Ads', roi: 4.2 },
-    { plataforma: 'Google Ads', roi: 3.8 },
+  const leadCacData = [
+    { plataforma: 'Meta Ads', cac: 95 },
+    { plataforma: 'Google Ads', cac: 120 },
   ];
 
-  const cacData = [
-    { plataforma: 'Meta Ads', cac: 185 },
-    { plataforma: 'Google Ads', cac: 220 },
-  ];
-
-  const originData = [
-    { name: 'Meta Ads', value: 45, color: 'hsl(var(--primary))' },
+  const leadOriginData = [
+    { name: 'Meta Ads', value: 52, color: 'hsl(var(--primary))' },
     { name: 'Google Ads', value: 35, color: 'hsl(var(--secondary))' },
-    { name: 'Indicação', value: 15, color: 'hsl(var(--accent))' },
+    { name: 'Indicação', value: 8, color: 'hsl(var(--accent))' },
     { name: 'Orgânico', value: 5, color: 'hsl(var(--muted))' },
   ];
 
@@ -79,7 +75,7 @@ export const OverviewTab = () => {
             <CardContent>
               <div className="text-2xl font-bold">{kpi.value}</div>
               <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-                <span className="text-green-600 font-medium">{kpi.change}</span>
+                <span className={kpi.change.startsWith('+') ? "text-green-600 font-medium" : "text-red-600 font-medium"}>{kpi.change}</span>
                 <span>{kpi.description}</span>
               </div>
             </CardContent>
@@ -109,55 +105,39 @@ export const OverviewTab = () => {
           </CardContent>
         </Card>
 
-        {/* ROI por Plataforma */}
-        <Card>
-          <CardHeader>
-            <CardTitle>ROI por Plataforma</CardTitle>
-            <CardDescription>Retorno sobre investimento em anúncios</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={roiData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="plataforma" />
-                <YAxis />
-                <Tooltip formatter={(value) => [`${value}x`, 'ROI']} />
-                <Bar dataKey="roi" fill="hsl(var(--primary))" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+        {/* Funil de Vendas */}
+        <SalesFunnel />
 
-        {/* CAC por Plataforma */}
+        {/* CAC de Leads por Plataforma */}
         <Card>
           <CardHeader>
-            <CardTitle>Custo por Aquisição (CAC)</CardTitle>
-            <CardDescription>Custo para adquirir um novo aluno por plataforma</CardDescription>
+            <CardTitle>Custo por Aquisição de Leads por Plataforma</CardTitle>
+            <CardDescription>Custo para gerar um lead via Meta Ads e Google Ads</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={cacData}>
+              <BarChart data={leadCacData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="plataforma" />
                 <YAxis />
-                <Tooltip formatter={(value) => [`R$ ${value}`, 'CAC']} />
+                <Tooltip formatter={(value) => [`R$ ${value}`, 'CAC de Lead']} />
                 <Bar dataKey="cac" fill="hsl(var(--secondary))" />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
-        {/* Origem dos Membros */}
+        {/* Origem dos Leads */}
         <Card>
           <CardHeader>
-            <CardTitle>Origem dos Novos Membros</CardTitle>
-            <CardDescription>Distribuição por canal de aquisição</CardDescription>
+            <CardTitle>Origem dos Leads</CardTitle>
+            <CardDescription>Distribuição por canal de aquisição de leads</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
-                  data={originData}
+                  data={leadOriginData}
                   cx="50%"
                   cy="50%"
                   labelLine={false}
@@ -166,7 +146,7 @@ export const OverviewTab = () => {
                   fill="#8884d8"
                   dataKey="value"
                 >
-                  {originData.map((entry, index) => (
+                  {leadOriginData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>

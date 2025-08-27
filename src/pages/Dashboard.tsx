@@ -4,6 +4,7 @@ import { BarChart3, Settings } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 import { PeriodProvider } from "@/contexts/PeriodContext";
 import { PeriodFilter } from "@/components/dashboard/PeriodFilter";
+import { PDFExportButton } from "@/components/dashboard/PDFExportButton";
 import { OverviewTab } from "@/components/dashboard/OverviewTab";
 import { MetaAdsTab } from "@/components/dashboard/MetaAdsTab";
 import { GoogleAdsTab } from "@/components/dashboard/GoogleAdsTab";
@@ -21,6 +22,7 @@ const Dashboard = () => {
               <h1 className="text-xl font-semibold">Dashboard - Gracie Barra Twickenham</h1>
             </div>
             <div className="ml-auto flex items-center space-x-4">
+              <PDFExportButton />
               <Badge variant="outline">Última atualização: há 5 min</Badge>
               <Settings className="h-5 w-5 text-muted-foreground cursor-pointer hover:text-foreground" />
             </div>

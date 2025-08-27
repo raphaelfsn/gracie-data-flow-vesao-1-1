@@ -1,37 +1,51 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Eye, MousePointer, Target, DollarSign, TrendingUp } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { EnhancedKPICard } from './EnhancedKPICard';
+import { LeadsByAudiencePieChart } from './LeadsByAudiencePieChart';
 
 export const GoogleAdsTab = () => {
   const kpis = [
+    {
+      title: "Valor Investido",
+      value: "R$ 3.210",
+      change: "+12.1%",
+      icon: DollarSign,
+      description: "Total gasto nas campanhas"
+    },
     {
       title: "Impressões",
       value: "89.450",
       change: "+16.2%",
       icon: Eye,
-      description: "Total de visualizações"
+      description: "Total de visualizações",
+      secondaryMetric: {
+        label: "CPM",
+        value: "R$ 68,50"
+      }
     },
     {
       title: "Cliques",
       value: "1.890",
       change: "+14.8%",
       icon: MousePointer,
-      description: "Cliques nos anúncios"
+      description: "Cliques nos anúncios",
+      secondaryMetric: {
+        label: "CPC Médio",
+        value: "R$ 3,25"
+      }
     },
     {
       title: "Conversões",
       value: "32",
       change: "+18.5%",
       icon: Target,
-      description: "Matrículas geradas"
-    },
-    {
-      title: "CPC Médio",
-      value: "R$ 3.25",
-      change: "-5.2%",
-      icon: DollarSign,
-      description: "Custo por clique"
+      description: "Matrículas geradas",
+      secondaryMetric: {
+        label: "CPL",
+        value: "R$ 215"
+      }
     },
     {
       title: "CTR",
@@ -39,24 +53,7 @@ export const GoogleAdsTab = () => {
       change: "+8.1%",
       icon: TrendingUp,
       description: "Taxa de cliques"
-    },
-    {
-      title: "CPM",
-      value: "R$ 68.50",
-      change: "-3.8%",
-      icon: DollarSign,
-      description: "Custo por mil impressões"
     }
-  ];
-
-  const conversionsEvolution = [
-    { data: '01/05', conversoes: 6 },
-    { data: '02/05', conversoes: 8 },
-    { data: '03/05', conversoes: 5 },
-    { data: '04/05', conversoes: 9 },
-    { data: '05/05', conversoes: 7 },
-    { data: '06/05', conversoes: 11 },
-    { data: '07/05', conversoes: 8 },
   ];
 
   const keywordPerformance = [
@@ -107,67 +104,50 @@ export const GoogleAdsTab = () => {
     }
   ];
 
-  const costPerConversionData = keywordPerformance.map(item => ({
+  const clicksByKeyword = keywordPerformance.map(item => ({
     palavra_chave: item.palavra_chave,
-    custo: item.custo_conversao
+    cliques: item.cliques
   }));
 
   return (
     <div className="space-y-6">
       {/* KPIs Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {kpis.map((kpi, index) => (
-          <Card key={index}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{kpi.title}</CardTitle>
-              <kpi.icon className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{kpi.value}</div>
-              <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-                <span className={kpi.change.startsWith('+') ? "text-green-600 font-medium" : "text-red-600 font-medium"}>{kpi.change}</span>
-                <span>{kpi.description}</span>
-              </div>
-            </CardContent>
-          </Card>
+          <EnhancedKPICard
+            key={index}
+            title={kpi.title}
+            value={kpi.value}
+            change={kpi.change}
+            icon={kpi.icon}
+            description={kpi.description}
+            secondaryMetric={kpi.secondaryMetric}
+          />
         ))}
       </div>
 
       {/* Charts Grid */}
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Conversions Evolution */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Evolução das Conversões</CardTitle>
-            <CardDescription>Tendência diária de conversões do Google Ads</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={conversionsEvolution}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="data" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="conversoes" stroke="hsl(var(--primary))" strokeWidth={2} />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+        {/* Leads por Público-Alvo */}
+        <LeadsByAudiencePieChart 
+          title="Distribuição de Leads por Público-Alvo"
+          description="Leads por conjunto de anúncios no Google Ads"
+        />
 
-        {/* Cost per Conversion by Keyword */}
+        {/* Cliques por Palavra-Chave */}
         <Card>
           <CardHeader>
-            <CardTitle>Custo por Conversão por Palavra-Chave</CardTitle>
-            <CardDescription>Eficiência de conversão por termo de pesquisa</CardDescription>
+            <CardTitle>Cliques por Palavra-Chave</CardTitle>
+            <CardDescription>Top palavras-chave por número de cliques</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={costPerConversionData}>
+              <BarChart data={clicksByKeyword}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="palavra_chave" angle={-45} textAnchor="end" height={80} />
                 <YAxis />
-                <Tooltip formatter={(value) => [`R$ ${value}`, 'Custo por Conversão']} />
-                <Bar dataKey="custo" fill="hsl(var(--secondary))" />
+                <Tooltip formatter={(value) => [`${value} cliques`, 'Cliques']} />
+                <Bar dataKey="cliques" fill="hsl(var(--primary))" />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
