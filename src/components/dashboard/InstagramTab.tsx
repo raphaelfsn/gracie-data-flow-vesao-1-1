@@ -89,10 +89,10 @@ export const InstagramTab = () => {
   ];
 
   const followersOrigin = [
-    { name: 'Explorar', value: 45, color: 'hsl(var(--primary))' },
-    { name: 'Hashtags', value: 30, color: 'hsl(var(--secondary))' },
-    { name: 'Perfil', value: 15, color: 'hsl(var(--accent))' },
-    { name: 'Outros', value: 10, color: 'hsl(var(--muted))' },
+    { name: 'Explorar', value: 45, color: '#7C3AED' },
+    { name: 'Hashtags', value: 30, color: '#8B5CF6' },
+    { name: 'Perfil', value: 15, color: '#F97316' },
+    { name: 'Outros', value: 10, color: '#FB923C' },
   ];
 
   return (

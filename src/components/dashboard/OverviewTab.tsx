@@ -56,10 +56,10 @@ export const OverviewTab = () => {
   ];
 
   const leadOriginData = [
-    { name: 'Meta Ads', value: 52, color: 'hsl(var(--primary))' },
-    { name: 'Google Ads', value: 35, color: 'hsl(var(--secondary))' },
-    { name: 'Indicação', value: 8, color: 'hsl(var(--accent))' },
-    { name: 'Orgânico', value: 5, color: 'hsl(var(--muted))' },
+    { name: 'Meta Ads', value: 52, color: '#7C3AED' },
+    { name: 'Google Ads', value: 35, color: '#8B5CF6' },
+    { name: 'Indicação', value: 8, color: '#F97316' },
+    { name: 'Orgânico', value: 5, color: '#FB923C' },
   ];
 
   return (

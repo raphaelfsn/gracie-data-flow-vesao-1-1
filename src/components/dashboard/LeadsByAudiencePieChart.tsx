@@ -7,9 +7,9 @@ interface LeadsByAudienceProps {
 }
 
 const audienceData = [
-  { name: 'Homens', value: 18, color: 'hsl(var(--primary))' },
-  { name: 'Mulheres', value: 15, color: 'hsl(var(--secondary))' },
-  { name: 'Kids', value: 12, color: 'hsl(var(--accent))' },
+  { name: 'Homens', value: 18, color: '#7C3AED' },
+  { name: 'Mulheres', value: 15, color: '#8B5CF6' },
+  { name: 'Kids', value: 12, color: '#F97316' },
 ];
 
 export const LeadsByAudiencePieChart = ({ 
