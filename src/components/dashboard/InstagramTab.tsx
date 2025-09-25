@@ -35,14 +35,14 @@ export const InstagramTab = () => {
     }
   ];
 
-  const engagementEvolution = [
-    { data: '01/05', engajamento: 180 },
-    { data: '02/05', engajamento: 220 },
-    { data: '03/05', engajamento: 195 },
-    { data: '04/05', engajamento: 275 },
-    { data: '05/05', engajamento: 240 },
-    { data: '06/05', engajamento: 320 },
-    { data: '07/05', engajamento: 290 },
+  const followersEvolution = [
+    { data: '01/05', seguidores: 3580 },
+    { data: '02/05', seguidores: 3602 },
+    { data: '03/05', seguidores: 3618 },
+    { data: '04/05', seguidores: 3645 },
+    { data: '05/05', seguidores: 3668 },
+    { data: '06/05', seguidores: 3691 },
+    { data: '07/05', seguidores: 3736 },
   ];
 
   const postsPerformance = [
@@ -118,20 +118,20 @@ export const InstagramTab = () => {
 
       {/* Charts Grid */}
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Engagement Evolution */}
+        {/* Followers Evolution */}
         <Card>
           <CardHeader>
-            <CardTitle>Evolução do Engajamento</CardTitle>
-            <CardDescription>Variação diária das interações</CardDescription>
+            <CardTitle>Evolução de Seguidores</CardTitle>
+            <CardDescription>Crescimento da base de seguidores</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={engagementEvolution}>
+              <LineChart data={followersEvolution}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="data" />
                 <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="engajamento" stroke="hsl(var(--primary))" strokeWidth={2} />
+                <Tooltip formatter={(value) => [`${value} seguidores`, 'Total']} />
+                <Line type="monotone" dataKey="seguidores" stroke="#7C3AED" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
