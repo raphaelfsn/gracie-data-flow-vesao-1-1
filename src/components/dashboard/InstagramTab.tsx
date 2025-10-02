@@ -1,7 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
-import { Users, Heart, Eye, ExternalLink, TrendingUp } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { Users, Heart, Eye, ExternalLink } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { FollowerFunnel } from './FollowerFunnel';
 
 export const InstagramTab = () => {
   const kpis = [
@@ -88,12 +89,6 @@ export const InstagramTab = () => {
     }
   ];
 
-  const followersOrigin = [
-    { name: 'Explorar', value: 45, color: '#7C3AED' },
-    { name: 'Hashtags', value: 30, color: '#8B5CF6' },
-    { name: 'Perfil', value: 15, color: '#F97316' },
-    { name: 'Outros', value: 10, color: '#FB923C' },
-  ];
 
   return (
     <div className="space-y-6">
@@ -137,34 +132,8 @@ export const InstagramTab = () => {
           </CardContent>
         </Card>
 
-        {/* Followers Origin */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Origem dos Seguidores</CardTitle>
-            <CardDescription>De onde vieram os novos seguidores</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={followersOrigin}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {followersOrigin.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+        {/* Funil de Aquisição de Seguidores */}
+        <FollowerFunnel />
       </div>
 
       {/* Posts Performance Table */}

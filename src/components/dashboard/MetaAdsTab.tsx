@@ -3,7 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Eye, MousePointer, Target, DollarSign, TrendingUp, Users } from 'lucide-react';
 import { EnhancedKPICard } from './EnhancedKPICard';
 import { LeadsByAudiencePieChart } from './LeadsByAudiencePieChart';
-import { FollowerCampaignIndicators } from './FollowerCampaignIndicators';
+import { ConversionFunnel } from './ConversionFunnel';
 import { HoverableCreativeCell } from './HoverableCreativeCell';
 
 export const MetaAdsTab = () => {
@@ -133,8 +133,8 @@ export const MetaAdsTab = () => {
         {/* Leads por Público-Alvo */}
         <LeadsByAudiencePieChart />
 
-        {/* Indicadores da Campanha de Seguidores */}
-        <FollowerCampaignIndicators />
+        {/* Funil de Conversão */}
+        <ConversionFunnel />
       </div>
 
       {/* Performance Table */}

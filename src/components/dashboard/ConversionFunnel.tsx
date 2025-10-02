@@ -7,68 +7,58 @@ interface FunnelStep {
   description: string;
 }
 
-const funnelData: FunnelStep[] = [
+const conversionFunnelData: FunnelStep[] = [
   {
-    label: "Total de Alcance",
-    value: 134680,
-    description: "Meta + Google Ads"
+    label: "Alcance",
+    value: 45230,
+    description: "Conversão + Remarketing"
   },
   {
     label: "Cliques no Link",
-    value: 4230,
-    description: "Meta + Google Ads"
+    value: 2340,
+    description: "Tráfego gerado"
   },
   {
-    label: "Visitas no Site", 
-    value: 3450,
-    description: "Tráfego total"
+    label: "Visualização de Página",
+    value: 1850,
+    description: "Páginas visitadas"
   },
   {
-    label: "Formulários Enviados",
-    value: 127,
-    description: "WIX Forms"
-  },
-  {
-    label: "Novos Membros",
-    value: 28,
-    description: "Conversões finais"
+    label: "Leads",
+    value: 45,
+    description: "Formulários enviados"
   }
 ];
 
-// Degradê de azul/primário: do mais claro ao mais escuro
-const colors = [
-  'hsl(var(--primary) / 0.3)',
-  'hsl(var(--primary) / 0.5)',
-  'hsl(var(--primary) / 0.7)',
-  'hsl(var(--primary) / 0.85)',
-  'hsl(var(--primary))'
-];
+// Degradê roxo: do mais claro ao mais escuro
+const colors = ['#E9D5FF', '#C084FC', '#A855F7', '#7C3AED'];
 
-// Clip paths para trapézios progressivos (5 etapas)
+// Clip paths para trapézios progressivos
 const trapezoidPaths = [
-  'polygon(3% 0%, 97% 0%, 92% 100%, 8% 100%)',
-  'polygon(8% 0%, 92% 0%, 85% 100%, 15% 100%)',
-  'polygon(15% 0%, 85% 0%, 75% 100%, 25% 100%)',
-  'polygon(25% 0%, 75% 0%, 65% 100%, 35% 100%)',
-  'polygon(35% 0%, 65% 0%, 55% 100%, 45% 100%)'
+  'polygon(5% 0%, 95% 0%, 90% 100%, 10% 100%)',
+  'polygon(10% 0%, 90% 0%, 80% 100%, 20% 100%)',
+  'polygon(20% 0%, 80% 0%, 70% 100%, 30% 100%)',
+  'polygon(30% 0%, 70% 0%, 60% 100%, 40% 100%)'
 ];
 
-export const SalesFunnel = () => {
+export const ConversionFunnel = () => {
+  const maxValue = conversionFunnelData[0].value;
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Funil de Vendas</CardTitle>
-        <CardDescription>Jornada completa do lead até a conversão</CardDescription>
+        <CardTitle>Funil de Conversão</CardTitle>
+        <CardDescription>Campanhas de Conversão + Remarketing</CardDescription>
       </CardHeader>
       <CardContent className="py-4">
         <div className="relative max-w-md mx-auto">
-          {funnelData.map((step, index) => {
+          {conversionFunnelData.map((step, index) => {
             return (
               <div key={index} className="relative mb-2">
                 {/* Seção do Funil - Trapézio */}
                 <div className="relative flex justify-center">
                   <div 
-                    className="relative flex items-center justify-center min-h-[55px] transition-all duration-300 text-primary-foreground"
+                    className="relative flex items-center justify-center min-h-[55px] transition-all duration-300 text-white"
                     style={{
                       backgroundColor: colors[index],
                       clipPath: trapezoidPaths[index],
@@ -84,7 +74,7 @@ export const SalesFunnel = () => {
                 </div>
 
                 {/* Seta para próxima etapa */}
-                {index < funnelData.length - 1 && (
+                {index < conversionFunnelData.length - 1 && (
                   <div className="flex justify-center py-1">
                     <ChevronDown className="h-4 w-4 text-muted-foreground/60" />
                   </div>
@@ -94,13 +84,17 @@ export const SalesFunnel = () => {
           })}
         </div>
 
-        {/* Resumo */}
-        <div className="mt-6 pt-4 border-t">
+        {/* Métricas Adicionais */}
+        <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t">
           <div className="text-center">
-            <div className="text-xs text-muted-foreground mb-1">Taxa de Conversão Geral</div>
             <div className="text-2xl font-bold text-primary">
-              {((funnelData[funnelData.length - 1].value / funnelData[0].value) * 100).toFixed(2)}%
+              {((conversionFunnelData[conversionFunnelData.length - 1].value / conversionFunnelData[0].value) * 100).toFixed(2)}%
             </div>
+            <div className="text-xs text-muted-foreground">Taxa de Conversão Geral</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-secondary">R$ 185</div>
+            <div className="text-xs text-muted-foreground">Custo por Lead</div>
           </div>
         </div>
       </CardContent>
