@@ -37,10 +37,10 @@ const funnelData: FunnelStep[] = [
 
 // Degradê de azul/primário: do mais claro ao mais escuro
 const colors = [
-  'hsl(var(--primary) / 0.3)',
   'hsl(var(--primary) / 0.5)',
-  'hsl(var(--primary) / 0.7)',
-  'hsl(var(--primary) / 0.85)',
+  'hsl(var(--primary) / 0.65)',
+  'hsl(var(--primary) / 0.8)',
+  'hsl(var(--primary) / 0.9)',
   'hsl(var(--primary))'
 ];
 

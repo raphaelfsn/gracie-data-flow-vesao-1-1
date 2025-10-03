@@ -31,7 +31,7 @@ const followerFunnelData: FunnelStep[] = [
 ];
 
 // Degradê laranja: do mais claro ao mais escuro
-const colors = ['#FED7AA', '#FDBA74', '#FB923C', '#F97316'];
+const colors = ['#FDBA74', '#FB923C', '#F97316', '#EA580C'];
 
 // Clip paths para trapézios progressivos
 const trapezoidPaths = [
@@ -89,7 +89,7 @@ export const FollowerFunnel = () => {
             <div className="text-xs text-muted-foreground">Custo por Seguidor</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-secondary">
+            <div className="text-2xl font-bold text-primary">
               {((followerFunnelData[followerFunnelData.length - 1].value / followerFunnelData[0].value) * 100).toFixed(1)}%
             </div>
             <div className="text-xs text-muted-foreground">Taxa de Conversão</div>

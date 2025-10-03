@@ -31,7 +31,7 @@ const conversionFunnelData: FunnelStep[] = [
 ];
 
 // Degradê roxo: do mais claro ao mais escuro
-const colors = ['#E9D5FF', '#C084FC', '#A855F7', '#7C3AED'];
+const colors = ['#C084FC', '#A855F7', '#9333EA', '#7C3AED'];
 
 // Clip paths para trapézios progressivos
 const trapezoidPaths = [
@@ -93,7 +93,7 @@ export const ConversionFunnel = () => {
             <div className="text-xs text-muted-foreground">Taxa de Conversão Geral</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-secondary">R$ 185</div>
+            <div className="text-2xl font-bold text-primary">R$ 185</div>
             <div className="text-xs text-muted-foreground">Custo por Lead</div>
           </div>
         </div>
