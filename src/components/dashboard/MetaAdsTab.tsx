@@ -72,7 +72,7 @@ export const MetaAdsTab = () => {
       cpc: 2.65,
       ctr: 3.32,
       cpm: 87.50,
-      custo_aquisicao: 180,
+      custo_por_lead: 180,
       url: "https://example.com/creative1",
       preview: "/placeholder.svg"
     },
@@ -83,7 +83,7 @@ export const MetaAdsTab = () => {
       cpc: 2.90,
       ctr: 3.28,
       cpm: 95.20,
-      custo_aquisicao: 195,
+      custo_por_lead: 195,
       url: "https://example.com/creative2",
       preview: "/placeholder.svg"
     },
@@ -94,7 +94,7 @@ export const MetaAdsTab = () => {
       cpc: 3.10,
       ctr: 2.62,
       cpm: 81.30,
-      custo_aquisicao: 210,
+      custo_por_lead: 210,
       url: "https://example.com/creative3",
       preview: "/placeholder.svg"
     },
@@ -105,7 +105,7 @@ export const MetaAdsTab = () => {
       cpc: 2.45,
       ctr: 3.64,
       cpm: 89.10,
-      custo_aquisicao: 165,
+      custo_por_lead: 165,
       url: "https://example.com/creative4",
       preview: "/placeholder.svg"
     }
@@ -153,7 +153,7 @@ export const MetaAdsTab = () => {
                 <TableHead>CPC</TableHead>
                 <TableHead>CTR</TableHead>
                 <TableHead>CPM</TableHead>
-                <TableHead>CAC</TableHead>
+                <TableHead>CPL</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -169,7 +169,7 @@ export const MetaAdsTab = () => {
                   <TableCell>R$ {item.cpc.toFixed(2)}</TableCell>
                   <TableCell>{item.ctr}%</TableCell>
                   <TableCell>R$ {item.cpm.toFixed(2)}</TableCell>
-                  <TableCell>R$ {item.custo_aquisicao}</TableCell>
+                  <TableCell>R$ {item.custo_por_lead}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

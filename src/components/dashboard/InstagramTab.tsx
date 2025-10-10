@@ -1,38 +1,56 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
-import { Users, Heart, Eye, ExternalLink } from 'lucide-react';
+import { Users, Heart, Eye, ExternalLink, DollarSign, UserPlus } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { FollowerFunnel } from './FollowerFunnel';
 
 export const InstagramTab = () => {
   const kpis = [
     {
-      title: "Novos Seguidores",
-      value: "156",
-      change: "+24.8%",
-      icon: Users,
-      description: "Este mês"
+      title: "Valor Investido",
+      value: "R$ 382",
+      change: "+8.2%",
+      icon: DollarSign,
+      description: "Campanha de seguidores"
     },
     {
-      title: "Engajamento Total",
+      title: "Alcance",
+      value: "28.500",
+      change: "+22.1%",
+      icon: Users,
+      description: "Campanha de seguidores",
+      secondaryMetric: {
+        label: "CPM",
+        value: "R$ 13,40"
+      }
+    },
+    {
+      title: "Engajamento",
       value: "2.340",
       change: "+18.2%",
       icon: Heart,
-      description: "Curtidas + comentários"
+      description: "Interações totais"
     },
     {
-      title: "Alcance das Publicações",
-      value: "18.450",
-      change: "+22.5%",
+      title: "Visitas no Perfil",
+      value: "890",
+      change: "+28.5%",
       icon: Eye,
-      description: "Contas alcançadas"
+      description: "Visualizações do perfil"
     },
     {
-      title: "Cliques no Link da Bio",
-      value: "89",
+      title: "Cliques na Bio",
+      value: "580",
       change: "+15.6%",
       icon: ExternalLink,
       description: "Cliques no link"
+    },
+    {
+      title: "Novos Seguidores",
+      value: "156",
+      change: "+24.8%",
+      icon: UserPlus,
+      description: "Seguidores adquiridos"
     }
   ];
 
@@ -49,43 +67,43 @@ export const InstagramTab = () => {
   const postsPerformance = [
     {
       post: "Aula de Guard Pass",
-      engajamento: 425,
       alcance: 2850,
-      comentarios: 38,
-      curtidas: 387,
-      salvamentos: 45
+      engajamento: 425,
+      cliques: 68,
+      visualizacao_pagina: 52,
+      preview: "/placeholder.svg"
     },
     {
       post: "Competição Regional",
-      engajamento: 380,
       alcance: 2650,
-      comentarios: 42,
-      curtidas: 338,
-      salvamentos: 28
+      engajamento: 380,
+      cliques: 58,
+      visualizacao_pagina: 45,
+      preview: "/placeholder.svg"
     },
     {
       post: "Treino Feminino",
-      engajamento: 510,
       alcance: 3200,
-      comentarios: 55,
-      curtidas: 455,
-      salvamentos: 62
+      engajamento: 510,
+      cliques: 82,
+      visualizacao_pagina: 67,
+      preview: "/placeholder.svg"
     },
     {
       post: "Professor Visitante",
-      engajamento: 295,
       alcance: 2100,
-      comentarios: 25,
-      curtidas: 270,
-      salvamentos: 18
+      engajamento: 295,
+      cliques: 45,
+      visualizacao_pagina: 35,
+      preview: "/placeholder.svg"
     },
     {
       post: "Graduação Faixas",
-      engajamento: 680,
       alcance: 4200,
-      comentarios: 78,
-      curtidas: 602,
-      salvamentos: 85
+      engajamento: 680,
+      cliques: 105,
+      visualizacao_pagina: 88,
+      preview: "/placeholder.svg"
     }
   ];
 
@@ -93,7 +111,7 @@ export const InstagramTab = () => {
   return (
     <div className="space-y-6">
       {/* KPIs Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {kpis.map((kpi, index) => (
           <Card key={index}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -106,6 +124,12 @@ export const InstagramTab = () => {
                 <span className="text-green-600 font-medium">{kpi.change}</span>
                 <span>{kpi.description}</span>
               </div>
+              {kpi.secondaryMetric && (
+                <div className="mt-2 pt-2 border-t">
+                  <div className="text-xs text-muted-foreground">{kpi.secondaryMetric.label}</div>
+                  <div className="text-sm font-semibold">{kpi.secondaryMetric.value}</div>
+                </div>
+              )}
             </CardContent>
           </Card>
         ))}
@@ -147,22 +171,20 @@ export const InstagramTab = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>Post</TableHead>
-                <TableHead>Engajamento</TableHead>
                 <TableHead>Alcance</TableHead>
-                <TableHead>Comentários</TableHead>
-                <TableHead>Curtidas</TableHead>
-                <TableHead>Salvamentos</TableHead>
+                <TableHead>Engajamento</TableHead>
+                <TableHead>Cliques</TableHead>
+                <TableHead>Visualização da Página</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {postsPerformance.map((item, index) => (
                 <TableRow key={index}>
                   <TableCell className="font-medium">{item.post}</TableCell>
-                  <TableCell>{item.engajamento}</TableCell>
                   <TableCell>{item.alcance.toLocaleString()}</TableCell>
-                  <TableCell>{item.comentarios}</TableCell>
-                  <TableCell>{item.curtidas}</TableCell>
-                  <TableCell>{item.salvamentos}</TableCell>
+                  <TableCell>{item.engajamento}</TableCell>
+                  <TableCell>{item.cliques}</TableCell>
+                  <TableCell>{item.visualizacao_pagina}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

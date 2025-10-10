@@ -19,6 +19,11 @@ const followerFunnelData: FunnelStep[] = [
     description: "Interações totais"
   },
   {
+    label: "Visitas no Perfil",
+    value: 890,
+    description: "Visualizações do perfil"
+  },
+  {
     label: "Cliques no Link",
     value: 580,
     description: "Cliques na bio"
@@ -31,14 +36,15 @@ const followerFunnelData: FunnelStep[] = [
 ];
 
 // Degradê laranja: do mais claro ao mais escuro
-const colors = ['#FDBA74', '#FB923C', '#F97316', '#EA580C'];
+const colors = ['#FDBA74', '#FB923C', '#F97316', '#EA580C', '#C2410C'];
 
 // Clip paths para trapézios progressivos
 const trapezoidPaths = [
   'polygon(5% 0%, 95% 0%, 90% 100%, 10% 100%)',
-  'polygon(10% 0%, 90% 0%, 80% 100%, 20% 100%)',
-  'polygon(20% 0%, 80% 0%, 70% 100%, 30% 100%)',
-  'polygon(30% 0%, 70% 0%, 60% 100%, 40% 100%)'
+  'polygon(10% 0%, 90% 0%, 85% 100%, 15% 100%)',
+  'polygon(15% 0%, 85% 0%, 75% 100%, 25% 100%)',
+  'polygon(25% 0%, 75% 0%, 65% 100%, 35% 100%)',
+  'polygon(35% 0%, 65% 0%, 55% 100%, 45% 100%)'
 ];
 
 export const FollowerFunnel = () => {
@@ -92,7 +98,7 @@ export const FollowerFunnel = () => {
             <div className="text-2xl font-bold text-primary">
               {((followerFunnelData[followerFunnelData.length - 1].value / followerFunnelData[0].value) * 100).toFixed(1)}%
             </div>
-            <div className="text-xs text-muted-foreground">Taxa de Conversão</div>
+            <div className="text-xs text-muted-foreground">Taxa de Conversão Geral</div>
           </div>
         </div>
       </CardContent>

@@ -95,12 +95,14 @@ export const SalesFunnel = () => {
         </div>
 
         {/* Resumo */}
-        <div className="mt-6 pt-4 border-t">
+        <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t">
           <div className="text-center">
-            <div className="text-xs text-muted-foreground mb-1">Taxa de Conversão Geral</div>
-            <div className="text-2xl font-bold text-primary">
-              {((funnelData[funnelData.length - 1].value / funnelData[0].value) * 100).toFixed(2)}%
-            </div>
+            <div className="text-2xl font-bold text-primary">R$ 187</div>
+            <div className="text-xs text-muted-foreground">CAC Novo Membro</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-primary">R$ 41,26</div>
+            <div className="text-xs text-muted-foreground">CPL Total</div>
           </div>
         </div>
       </CardContent>
